@@ -5,6 +5,7 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    
     steps:
       - uses: actions/checkout@v3
       
@@ -14,11 +15,18 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
       
+      # 1. Сначала запускаем приложение
       - name: Start SUT
         run: java -jar artifacts/app-order.jar &
       
+      # 2. Ждем немного, чтобы приложение успело запуститься
       - name: Wait for SUT to start
         run: sleep 10
       
+      # 3. Даем права на запуск скрипту gradlew (РЕШЕНИЕ ВАШЕЙ ОШИБКИ)
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+      
+      # 4. Запускаем тесты
       - name: Run tests
         run: ./gradlew test
