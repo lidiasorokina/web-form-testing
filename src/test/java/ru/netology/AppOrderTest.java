@@ -29,8 +29,8 @@ public class AppOrderTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--no-sandbox");
-        // options.addArguments("--headless"); // Раскомментируйте, если хотите скрытый режим
-
+        options.addArguments("--headless"); 
+        
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
     }
